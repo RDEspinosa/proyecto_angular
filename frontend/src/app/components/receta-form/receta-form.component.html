@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <b class="h5">Ingresar los datos de su receta</b>
+            </div>
+            <div class="card-body">
+                <form #recetaForm="ngForm" (ngSubmit)="agregarReceta(recetaForm)">
+
+                    <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="recetaService.seleccionarReceta._id">
+
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" [(ngModel)]="recetaService.seleccionarReceta.titulo" name="titulo" id="floatingInput" placeholder="Titulo" required>
+                        <label for="floatingInput">Titulo</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" [(ngModel)]="recetaService.seleccionarReceta.descripcion" name="descripcion" id="floatingPassword" placeholder="Descripcion" required>
+                        <label for="floatingPassword">Descripcion</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" [(ngModel)]="recetaService.seleccionarReceta.imagenes" name="imagenes" id="floatingImage" placeholder="Imagen" required>
+                        <label for="floatingImage">URL de la imagen</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" [(ngModel)]="recetaService.seleccionarReceta.preparacion" name="preparacion" id="floatingPreparation" placeholder="Preparación" required>
+                        <label for="floatingPreparation">Preparación</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" [(ngModel)]="recetaService.seleccionarReceta.ingredientes" name="ingredientes" id="floatingIngredients" placeholder="Ingredientes" required>
+                        <label for="floatingIngredients">Ingredientes</label>
+                    </div>
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" [(ngModel)]="recetaService.seleccionarReceta.notas" name="notas" id="floatingNote" placeholder="Nota" required>
+                        <label for="floatingNote">Nota</label>
+                    </div>
+                    <button class="btn btn-primary btn-block">Ingresar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8 table-responsive">
+        <table class="table table-hover">
+            <caption>List of users</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Imagen</th>
+                    <th scope="col">Titulo</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Ingredientes</th>
+                    <th scope="col">Preparación</th>
+                    <th scope="col">Notas</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let recetas of recetaService.recetas">
+                    <th scope="row"><img src="{{recetas.imagenes}}" class="rounded " WIDTH=70 HEIGHT=50></th>
+                    <td>{{recetas.titulo}}</td>
+                    <td>{{recetas.descripcion}}</td>
+                    <td>{{recetas.ingredientes}}</td>
+                    <td>{{recetas.preparacion}}</td>
+                    <td>{{recetas.notas}}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm" (click)="editarReceta(recetas)"><i class="fas fa-pencil-alt"></i></button>
+                        <button class="btn btn-danger btn-sm" (click)="eliminarReceta(recetas._id, recetaForm)"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
